@@ -1,0 +1,51 @@
+version: '3.4'
+
+services:
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+     - "5672:5672"  # Porta para conexão com aplicações
+     - "15673:15672"  # Interface de administração
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 10s
+      retries: 5
+
+  mysql:
+    image: "mysql:8.0"
+    environment:
+      MYSQL_ROOT_PASSWORD: "btgdbapp"
+      MYSQL_DATABASE: "btg"
+    ports:
+      - "3306:3306"  # Usando a porta 3307 para evitar conflitos
+    volumes:
+      - ./btgdb.sql:/docker-entrypoint-initdb.d/btgdb.sql
+      
+
+  microservice:
+    image: "consumerbtgservice"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+     rabbitmq:
+        condition: service_healthy  # Espera o RabbitMQ estar pronto
+     mysql:
+        condition: service_started  # Espera o MySQL apenas iniciar
+    ports:
+      - "5000:80"
+      - "5001:5001"
+    environment:
+      - RABBITMQ__HOST=rabbitmq
+      - RABBITMQ__PORT=5672
+      - RABBITMQ__USER=guest
+      - RABBITMQ__PASS=guest
+      - MYSQL__HOST=mysql
+      - MYSQL__PORT=3306
+      - MYSQL__DATABASE=btg
+      - MYSQL__USER=root
+      - MYSQL__PASSWORD=btgdbapp
+

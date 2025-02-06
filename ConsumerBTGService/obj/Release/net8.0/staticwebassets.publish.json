@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "59tPvDvsatCJ+zUMwaytUndrkTECV1+nM1wfH/I7PHM=",
+  "Source": "ConsumerBTGService",
+  "BasePath": "_content/ConsumerBTGService",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
