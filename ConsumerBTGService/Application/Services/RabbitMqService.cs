@@ -17,14 +17,12 @@ namespace ConsumerBTGService.Application.Services
     {
         private readonly IConnection _connection;
         private readonly IModel _channel;
-        //  private readonly IOrderService _orderService;
-      //  private readonly BtgDbContext _context;
+
         private readonly IServiceScopeFactory _serviceScopeFactory;
 
-        public RabbitMqService( IServiceScopeFactory serviceScopeFactory)
+        public RabbitMqService(IServiceScopeFactory serviceScopeFactory)
         {
-            // _orderService = orderService;
-          //  _context = context;
+
             _serviceScopeFactory = serviceScopeFactory;
             // Cria a conexão com o RabbitMQ
             var factory = new ConnectionFactory()
@@ -52,8 +50,7 @@ namespace ConsumerBTGService.Application.Services
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
                 Console.WriteLine(" [x] Message Received: {0}", message);
-                // Deserializar a mensagem recebida em um objeto JSON
-                //var order = JsonConvert.DeserializeObject<OrderDTO>(message);
+
                 OrderDTO? order = JsonConvert.DeserializeObject<OrderDTO>(message);
                 if (order == null)
                 {

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ConsumerBTGService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b10fcab18425d403a231a2d1642f31ccbc72fdc4")]
 [assembly: System.Reflection.AssemblyProductAttribute("ConsumerBTGService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ConsumerBTGService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
